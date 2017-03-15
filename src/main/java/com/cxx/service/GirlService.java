@@ -1,6 +1,8 @@
 package com.cxx.service;
 
 import com.cxx.domain.Girl;
+import com.cxx.enums.ResultEnum;
+import com.cxx.exception.GirlException;
 import com.cxx.repositoy.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +30,29 @@ public class GirlService {
         girlRepository.save(girl1);
 
     }
+
+    public void getAgeGirl(Integer  id) throws Exception{
+        Girl girl = girlRepository.findOne(id);
+
+        if(girl.getAge()<10){
+            throw new GirlException(ResultEnum.SMALL_ERROR);
+        }
+        if(girl.getAge()>10&&girl.getAge()<18){
+            throw new GirlException(ResultEnum.HIIGH_ERROR);
+        }
+
+
+    }
+
+    /**
+     * 单元测试
+     *
+     * @param id
+     * @return
+     */
+    public Girl getFoundOne(Integer id){
+
+        return  girlRepository.findOne(id);
+    }
+
 }

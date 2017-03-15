@@ -1,8 +1,10 @@
 package com.cxx.controller;
 
 import com.cxx.domain.Girl;
+import com.cxx.utils.ResultMessage;
 import com.cxx.repositoy.GirlRepository;
 import com.cxx.service.GirlService;
+import com.cxx.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +34,16 @@ public class GirlController {
     }
 
     @PostMapping(value = "/girls")
-    public Girl girlAdd(@Valid Girl girl,BindingResult bindingResult){
+    public ResultMessage<Girl> girlAdd(@Valid Girl girl,BindingResult bindingResult){
         logger.info("22222222222222");
         if(bindingResult.hasErrors()){
-            logger.info(bindingResult.getFieldError().getDefaultMessage());
             return null;
+           // return ResultUtil.error(-100,bindingResult.getFieldError().getDefaultMessage());
         }
         girl.setCap(girl.getCap());
         girl.setAge(girl.getAge());
-       return girlRepository.save(girl);
+
+       return ResultUtil.success(girlRepository.save(girl));
     }
 
 
@@ -82,6 +85,12 @@ public class GirlController {
        girlService.InsertTwo();
 
     }
+
+   @GetMapping(value = "/getAgeGirls/{id}")
+    public void getAge(@PathVariable("id") Integer id) throws Exception{
+           girlService.getAgeGirl(id);
+   }
+
 
 
 }
