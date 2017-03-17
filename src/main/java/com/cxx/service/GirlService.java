@@ -1,9 +1,9 @@
 package com.cxx.service;
 
-import com.cxx.domain.Girl;
+import com.cxx.domain.primary.Girl;
 import com.cxx.enums.ResultEnum;
 import com.cxx.exception.GirlException;
-import com.cxx.repositoy.GirlRepository;
+import com.cxx.repositoy.primary.GirlRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

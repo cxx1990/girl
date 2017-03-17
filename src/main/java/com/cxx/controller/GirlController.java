@@ -1,8 +1,10 @@
 package com.cxx.controller;
 
-import com.cxx.domain.Girl;
+
+
+import com.cxx.domain.secondary.Girls;
+import com.cxx.repositoy.secondary.GirlsRepository;
 import com.cxx.utils.ResultMessage;
-import com.cxx.repositoy.GirlRepository;
 import com.cxx.service.GirlService;
 import com.cxx.utils.ResultUtil;
 import org.slf4j.Logger;
@@ -21,20 +23,20 @@ import java.util.List;
 public class GirlController {
     private  final static Logger logger = LoggerFactory.getLogger(GirlController.class);
     @Autowired
-    private GirlRepository girlRepository;
+    private GirlsRepository girlRepository;
     @Autowired
     private GirlService girlService;
 
 
     
     @GetMapping(value = "/girls")
-    public List<Girl> girlList(){
+    public List<Girls> girlList(){
 
        return girlRepository.findAll();
     }
 
     @PostMapping(value = "/girls")
-    public ResultMessage<Girl> girlAdd(@Valid Girl girl,BindingResult bindingResult){
+    public ResultMessage<Girls> girlAdd(@Valid Girls girl,BindingResult bindingResult){
         logger.info("22222222222222");
         if(bindingResult.hasErrors()){
             return null;
@@ -48,16 +50,16 @@ public class GirlController {
 
 
     @GetMapping("/girls/{id}")
-    public Girl getgirls(@PathVariable("id") int id){
+    public Girls getgirls(@PathVariable("id") int id){
         return    girlRepository.findOne(id);
     }
 
 
     @PutMapping("/uapdateGirls")
-    public Girl updatagirls(@RequestParam("id") Integer id,
+    public Girls updatagirls(@RequestParam("id") Integer id,
                                      @RequestParam("cap") String cap,
                                       @RequestParam("age") Integer age){
-        Girl girl = new Girl();
+        Girls girl = new Girls();
         girl.setId(id);
         girl.setAge(age);
         girl.setCap(cap);
@@ -75,10 +77,10 @@ public class GirlController {
     }
 
     @GetMapping("/girls1/{age}")
-    public List<Girl> getgirls(@PathVariable("age") Integer age){
-        return    girlRepository.findByAge(age);
-    }
+    public List<Girls> getgirls(@PathVariable("age") Integer age) {
+        return girlRepository.findByAge(age);
 
+    }
 
     @PostMapping("/addTwo")
     public void two(){

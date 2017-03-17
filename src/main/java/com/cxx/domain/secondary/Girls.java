@@ -1,4 +1,4 @@
-package com.cxx.domain;
+package com.cxx.domain.secondary;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Min;
  * Created by chenxiangxiang on 2017/3/14.
  */
 @Entity
-public class Girl {
+public class Girls {
     @Id
     @GeneratedValue
     private Integer id;
@@ -18,7 +18,7 @@ public class Girl {
     @Min(value = 18,message = "未成年禁止入内！")
     private Integer age;
 
-    public Girl() {
+    public Girls() {
     }
 
     public Integer getId() {
